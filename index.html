@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回家の路</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义样式 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            accent: '#8B5CF6',
+            dark: '#1E293B',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .transition-custom {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .btn-hover {
+        @apply transform hover:scale-105 hover:shadow-lg;
+      }
+      .component-shadow {
+        @apply shadow-md hover:shadow-lg transition-custom;
+      }
+    }
+  </style>
+  
+  <!-- 任务栏Logo设置 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%233B82F6%22 d=%22M50,10 C66.5685425,10 80,23.4314575 80,40 C80,56.5685425 66.5685425,70 50,70 C33.4314575,70 20,56.5685425 20,40 C20,23.4314575 33.4314575,10 50,10 Z%22/><path fill=%22white%22 d=%22M50,20 C55.5228475,20 60,24.4771525 60,30 C60,35.5228475 55.5228475,40 50,40 C44.4771525,40 40,35.5228475 40,30 C40,24.4771525 44.4771525,20 50,20 Z%22/></svg>">
+</head>
+<body class="bg-gray-50 font-inter text-dark min-h-screen flex flex-col">
+  <div class="container mx-auto px-4 py-8 flex-grow">
+    <h1 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">回家の路</h1>
+    
+    <!-- 10个自定义组件 -->
+    <div id="components-container" class="space-y-8">
+      <!-- 组件将通过JavaScript动态生成 -->
+    </div>
+  </div>
+  
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-6 mt-12">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-lg">水喝千束  x  联邦综合</p>
+      <p class="text-sm mt-2 opacity-70">© 2025  水喝千束 拥有waterchisato.github.io的所有权</p>
+    </div>
+  </footer>
+
+  <script>
+    // 组件数据 - 可以根据需要自定义文字和链接
+    const componentsData = [
+      { text: "waterchisato的个人链接合集", link: "https://waterchisato.github.io/zdy.web.github.io/" },
+      { text: "github跳转群聊", link: "https://waterchisato.github.io/LianbangZongHeJoinQQGrop.github.io/" },
+      { text: "github", link: "https://github.com/WaterChisato" },
+      { text: "博客主页", link: "https://waterchisato.github.io" },
+      { text: "待定", link: "https://" },
+      { text: "待定", link: "https://example.com/6" },
+      { text: "待定", link: "https://example.com/7" },
+      { text: "待定", link: "https://example.com/8" },
+      { text: "待定", link: "https://example.com/9" },
+      { text: "待定", link: "https://example.com/10" }
+    ];
+    
+    // 生成组件
+    function generateComponents() {
+      const container = document.getElementById('components-container');
+      
+      componentsData.forEach((component, index) => {
+        const componentEl = document.createElement('div');
+        componentEl.className = 'bg-white rounded-xl p-6 component-shadow';
+        
+        componentEl.innerHTML = `
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <span class="text-lg md:text-xl font-medium text-dark">${component.text}</span>
+            <button class="bg-primary hover:bg-primary/90 text-white font-medium py-2.5 px-6 rounded-lg btn-hover flex items-center">
+              <span>前往链接</span>
+              <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        `;
+        
+        // 添加点击事件
+        componentEl.querySelector('button').addEventListener('click', () => {
+          window.location.href = component.link;
+        });
+        
+        container.appendChild(componentEl);
+      });
+    }
+    
+    // 页面加载完成后生成组件
+    document.addEventListener('DOMContentLoaded', generateComponents);
+    
+    // 添加页面滚动效果
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('h1');
+      if (window.scrollY > 50) {
+        header.classList.add('text-secondary');
+        header.classList.remove('text-primary');
+      } else {
+        header.classList.add('text-primary');
+        header.classList.remove('text-secondary');
+      }
+    });
+  </script>
+</body>
+</html>
